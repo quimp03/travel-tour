@@ -2,6 +2,10 @@ extends ../../layouts/default
 include ../../mixins/box-head
 include ../../mixins/moment
 block main
+  div(
+    class="alert alert-success alert-hidden"
+    alert-add-cart-success
+  ) Đã thêm tour vào giỏ hàng! <span close-alert>X</span>
   .tour-detail
     .container.my-3
       .row 

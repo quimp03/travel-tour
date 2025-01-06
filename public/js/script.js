@@ -15,6 +15,37 @@
       swiper: swiper,
     },
   });
+
+//hien thi thong bao
+const alertAddTourSuccess = () => {
+  const elementAlert = document.querySelector("[alert-add-cart-success]")
+  const closeAlert = document.querySelector("[close-alert]")
+  if(closeAlert){
+    closeAlert.addEventListener("click", () => {
+      elementAlert.classList.add("alert-hidden")
+    })
+  }
+    if(elementAlert){
+      elementAlert.classList.remove("alert-hidden")
+    setTimeout(() => {
+      elementAlert.classList.add("alert-hidden")
+    }, 3000);
+  } 
+} 
+
+//end hien thi thong bao
+
+//mini cart
+const showMiniCart = () => {
+  const cart = JSON.parse(localStorage.getItem("cart"))
+  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0)
+  const miniCart = document.querySelector("[mini-cart]")
+  if(miniCart){
+    miniCart.innerHTML = totalQuantity
+  }
+}
+//end mini cart
+showMiniCart()
 //cart
 const cartLocalStorage = localStorage.getItem("cart")
 if(!cartLocalStorage){
@@ -23,7 +54,7 @@ if(!cartLocalStorage){
 const cartForm = document.querySelector("[form-add-to-cart]")
 if(cartForm){
   cartForm.addEventListener("submit", (event) => {
-    event.preventDefault()
+    event.preventDefault()  
     const tourId =parseInt(cartForm.getAttribute("tour-id")) 
     const quantity = parseInt(event.target.elements.quantity.value)
     if(quantity > 0 && tourId){
@@ -37,9 +68,11 @@ if(cartForm){
       }else{
         cart[isExitTour].quantity = cart[isExitTour].quantity + quantity
       }
-      console.log(cart)
       localStorage.setItem("cart", JSON.stringify(cart))
+      alertAddTourSuccess()
+      showMiniCart()
     }
   })
 }
 //end cart
+
