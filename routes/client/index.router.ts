@@ -1,9 +1,11 @@
 import { Express } from "express";
-import { tour } from "./tours.router"
+import { tourRoutes } from "./tours.router"
 import { categoryRoutes } from "./category.router";
-import { cart } from "./cart.routers";
+import { cartRoutes } from "./cart.routers";
+import {orderRoutes} from "../../routes/client/order.toutes"
 export = (app: Express) => {
-    app.use("/tours", tour)
+    app.use("/tours", tourRoutes)
     app.use(`/categories`, categoryRoutes);
-    app.use("/cart", cart)
+    app.use("/cart", cartRoutes)
+    app.use("/order", orderRoutes)
 }

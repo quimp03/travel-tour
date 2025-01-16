@@ -7,6 +7,7 @@ export const index = async(req: Request, res: Response) => {
 }
 export const listJson = async(req: Request, res: Response) => {
     const tours = req.body
+    
     for (const tour of tours) {
         const id = tour.tourId
          const inforUser = await Tour.findOne({
