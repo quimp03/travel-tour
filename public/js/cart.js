@@ -84,7 +84,7 @@ const formBookTour = document.querySelector("[form-order]")
 if(formBookTour){
     formBookTour.addEventListener("submit", (event)=> {
         event.preventDefault()
-        const cart = JSON.parse(localStorage.getItem("cart")) 
+        const cart = JSON.parse(localStorage.getItem("cart"))
         const data = {
             inforUser: {
                 fullName: event.target.elements.fullName.value,
@@ -98,9 +98,14 @@ if(formBookTour){
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data)  
         }).then(res => res.json()).then(data =>{
             console.log(data)
+            if(data.code === 200){
+                window.location.href = `/order/success?orderCode=${data.orderCode}`
+            }else{
+                alert("Đặt hàng không thành công!")
+            }
         })
     } )
 }

@@ -38,11 +38,14 @@ const alertAddTourSuccess = () => {
 //mini cart
 const showMiniCart = () => {
   const cart = JSON.parse(localStorage.getItem("cart"))
-  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0)
-  const miniCart = document.querySelector("[mini-cart]")
-  if(miniCart){
-    miniCart.innerHTML = totalQuantity
+  if(cart){
+    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0)
+    const miniCart = document.querySelector("[mini-cart]")
+    if(miniCart){
+      miniCart.innerHTML = totalQuantity
+    }
   }
+  
 }
 //end mini cart
 showMiniCart()
